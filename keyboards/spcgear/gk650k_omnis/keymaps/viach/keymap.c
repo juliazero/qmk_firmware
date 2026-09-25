@@ -60,3 +60,45 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [2] = { ENCODER_CCW_CW(_______, _______) },
 };
 #endif
+
+//ColorHoster
+uint8_t color_buffer[RGB_MATRIX_LED_COUNT * 2] = {0};
+uint8_t brightness_buffer[RGB_MATRIX_LED_COUNT] = {[0 ... RGB_MATRIX_LED_COUNT - 1] = 255};
+
+#ifdef VIA_ENABLE
+void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
+    uint8_t channel_id = data[1];
+    if (channel_id != id_custom_channel) return;
+
+    uint8_t *command_id = &(data[0]);
+    uint8_t value_id    = data[2];
+    uint8_t led_index   = data[3];
+    uint8_t led_count   = data[4];
+
+    switch (*command_id) {
+        case id_custom_set_value:
+            if (value_id == 1) {
+                memcpy(color_buffer + led_index * 2, data + 5, led_count * 2);
+            } else if (value_id == 2) {
+                memcpy(brightness_buffer + led_index, data + 5, led_count);
+            }
+            break;
+
+        case id_custom_get_value:
+            if (value_id == 1) {
+                memcpy(data + 5, color_buffer + led_index * 2, led_count * 2);
+            } else if (value_id == 2) {
+                memcpy(data + 5, brightness_buffer + led_index, led_count);
+            }
+            break;
+
+        case id_custom_save:
+            // optional: implement persistent save here
+            break;
+
+        default:
+            *command_id = id_unhandled;
+            break;
+    }
+}
+#endif

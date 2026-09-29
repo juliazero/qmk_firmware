@@ -154,8 +154,7 @@
       {"matrix": [5, 16], "x": 177, "y": 64, "flags": 4},
       {"matrix": [5, 18], "x": 194, "y": 64, "flags": 4},
       {"matrix": [5, 19], "x": 209, "y": 64, "flags": 4}
-    ],
-    "timeout": 600000
+    ]
   },
   "layouts": {
     "LAYOUT": {

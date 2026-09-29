@@ -35,3 +35,17 @@
    Without these two the entries are silently compiled out. */
 #define RGB_MATRIX_KEYPRESSES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+
+/* EEPROM: the stock wear leveling on the embedded flash, but with its backend in
+   flash_eeprom.c (see there for why). With WEAR_LEVELING_DRIVER = custom nothing
+   pulls in wear_leveling_efl_config.h for the core, so the geometry is spelled out
+   here, with the defaults that header picks for the SN32F240B. */
+#define BACKING_STORE_WRITE_SIZE 4
+#define WEAR_LEVELING_BACKING_SIZE 2048
+#define WEAR_LEVELING_LOGICAL_SIZE 1024
+#define EEPROM_SIZE WEAR_LEVELING_LOGICAL_SIZE
+
+/* How long the RGB matrix settings have to stay unchanged before they go to
+   flash. Encoder detents, brightness taps and VIA slider steps within this
+   window end up as a single write. */
+#define GK650K_RGB_EECONFIG_FLUSH_DELAY 2000

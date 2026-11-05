@@ -268,7 +268,7 @@
   },
   "encoder": {
     "rotary": [
-      {"pin_a": "D4", "pin_b": "D3"}
+      {"pin_a": "D4", "pin_b": "D3", "resolution": 2}
     ]
   },
   "indicators": {

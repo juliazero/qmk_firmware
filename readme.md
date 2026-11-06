@@ -1,40 +1,153 @@
-# THIS IS THE DEVELOP BRANCH
+# GK650K Omnis — QMK Firmware
 
-Warning- This is the `develop` branch of QMK Firmware. You may encounter broken code here. Please see [Breaking Changes](https://docs.qmk.fm/#/breaking_changes) for more information.
+Custom QMK firmware and VIA definitions for the **SPC Gear GK650K Omnis**.
 
-# Quantum Mechanical Keyboard Firmware
+| Firmware variant | Description |
+|---|---|
+| `spcgear_gk650k_omnis_stockfw.bin` | Original Firmware |
+| `spcgear_gk650k_omnis_default.bin` | Default QMK Firmware |
+| `spcgear_gk650k_omnis_via.bin` | QMK FW with [VIA](https://github.com/the-via/app) and [ColorHoster](https://github.com/Azarattum/ColorHoster) |
 
-[![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/qmk)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
+## Keymap
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the Clueboard product line.
+#### Layer 1 — Fn:
 
-## Documentation
+<details>
+<summary>Details</summary>
 
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
+| Combination | Keycode | Function |
+|---|---|---|
+| `Fn + Esc` | `QK_BOOT` | Enter bootloader mode |
+| `Fn + F1` | `KC_MYCM` | Open My Computer / Home folder |
+| `Fn + F2` | `KC_WHOM` | Open the browser home page |
+| `Fn + F3` | `KC_CALC` | Launch the calculator |
+| `Fn + F4` | `KC_MSEL` | Launch the media player |
+| `Fn + F5` | `KC_MPRV` | Previous track |
+| `Fn + F6` | `KC_MNXT` | Next track |
+| `Fn + F7` | `KC_MPLY` | Play / Pause |
+| `Fn + F8` | `KC_MSTP` | Stop media playback |
+| `Fn + F9` | `KC_MUTE` | Mute / Unmute |
+| `Fn + F10` | `KC_VOLD` | Decrease volume |
+| `Fn + F11` | `KC_VOLU` | Increase volume |
+| `Fn + -` | `RM_NEXT` | Select the next RGB effect |
+| `Fn + =` | `RM_TOGG` | Toggle RGB on/off |
+| `Fn + [` | `RM_HUED` | Decrease hue |
+| `Fn + ]` | `RM_HUEU` | Increase hue |
+| `Fn + ↑` | `RM_VALU` | Increase keyboard brightness |
+| `Fn + ↓` | `RM_VALD` | Decrease keyboard brightness |
+| `Fn + ←` | `RM_SPDD` | Decrease animation speed |
+| `Fn + →` | `RM_SPDU` | Increase animation speed |
+| `Fn + <` | `RM_SATD` | Decrease saturation |
+| `Fn + >` | `RM_SATU` | Increase saturation |
+| `Fn + GUI` | `GU_TOGG` | Toggle the GUI modifier |
 
-The docs are powered by [VitePress](https://vitepress.dev/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
+</details>
 
-You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls).
+#### Rotary encoder:
 
-## Supported Keyboards
+<details>
+<summary>Details</summary>
 
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
+| Active layer | Counter-clockwise | Clockwise |
+|---|---|---|
+| 0: Base | Decrease volume | Increase volume |
+| 1: Fn | Previous effect | Next effect |
 
-The project also includes community support for [lots of other keyboards](/keyboards/).
+</details>
 
-## Maintainers
+## Instructions (thanks @Bonn333)
 
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
+#### Compiling from source:
 
-## Official Website
+<details>
+<summary>Linux:</summary>
 
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+1. Install [arm-gnu-toolchain-15.x](https://learn.arm.com/install-guides/gcc/arm-gnu/)
+2. Install [qmk cli](https://docs.qmk.fm/cli)
+3. Clone repository:
+   `git clone https://github.com/juliazero/qmk_firmware -b gk650k_omnis --recurse-submodules`
+4. Compile firmware
+   `qmk compile --clean -kb spcgear/gk650k_omnis -km <variant>`
+
+</details>
+
+<details>
+<summary>Windows:</summary>
+
+1. Install [qmk-msys](https://github.com/qmk/qmk_distro_msys/releases/tag/1.12.0) and run it
+3. Clone repository:
+   `git clone https://github.com/juliazero/qmk_firmware -b gk650k_omnis --recurse-submodules`
+4. Compile firmware
+   `qmk compile --clean -kb spcgear/gk650k_omnis -km <variant>`
+
+</details>
+
+#### Rebooting to bootloader:
+
+<details>
+<summary>HID Recovery method (Windows)</summary>
+
+1. Install Python: `winget install Python.Python.3.14`
+4. Open PowerShell/Windows Terminal as admin
+5. Run: `python.exe ./spcgear_gk650k_hid_recovery-windows.py`
+6. Keyboard should be booted in bootloader mode.
+	
+</details>
+
+<details>
+<summary>Dissasembly keyboard method</summary>
+
+1. Remove keycaps and screws:
+    <img width="50%" src="https://github.com/user-attachments/assets/f9afb3ff-127e-4302-ae91-8b893f816f78" />
+3. Open keyboard from front
+4. Wire the two pins (BOOT + GND) on the PCB before connecting the keyboard to USB.
+    <img width="50%" alt="obraz" src="https://github.com/user-attachments/assets/c1d6e264-bbea-4a9b-bf10-d577e8f44706" />
+	
+5. Remove wire after keyboard is connected without LEDs.
+	
+</details>
+
+<details>
+<summary>When QMK firmware is installed</summary>
+	
+`Fn + Esc` is mapped to `QK_BOOT` and can be used to enter the bootloader.
+	
+</details>
+
+#### Flashing:
+
+<details>
+<summary>Detalis</summary>
+
+[SonixFlasherC](https://github.com/SonixQMK/SonixFlasherC/releases) is required
+
+1. Check if keyboard is detected in bootloader mode: `sonixflasher -c`
+2. Flash: `sonixflasher -v 0c45/7040 -f spcgear_gk650k_omnis_<variant>.bin`
+
+</details>
+
+#### Configuring:
+
+<details>
+<summary>VIA</summary>
+
+1. Open https://usevia.app/
+2. Go to Settings
+3. Enable `Show design tab`
+4. Go to DESIGN tab
+7. Upload `spcgear_gk650k_omnis_via_definition.json`.
+
+</details>
+
+<details>
+<summary>ColorHoster and OpenRGB</summary>
+
+1. Download & extract [ColorHoster](https://github.com/Azarattum/ColorHoster/releases) and move it to eg. C:\ProgramFiles\
+2. Copy your VIA keyboard configuration file to the configs folder (create it)
+3. Run PowerShell or Windows Terminal as Administrator and execute:
+`.\ColorHoster.exe -p 6743 -b -d "C:\Program Files\ColorHoster\configs" -s create`
+4. Then start the service:
+`.\ColorHoster.exe -s start`
+6. In OpenRGB, go to Client SDK tab, set the port to 6743, click Connect, then click Save Connection.
+
+</details>
